@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://cisco.com/cucmws/pub/jaxb/phoneservices/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/phoneservices/get"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetPhoneServices_"/>
+					<jaxb:elementName prefix="JAXBGetPhoneServices_"/>
+					<jaxb:modelGroupName prefix="JAXBGetPhoneServices_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetPhoneServices_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="phoneService">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="category" type="xs:string"/>
+			<xs:element name="vendor" type="xs:string"/>
+			<xs:element name="serviceVersion" type="xs:string"/>
+			<xs:element name="enabled" type="xs:boolean"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="phoneServices">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="phoneService" type="phoneService" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

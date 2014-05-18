@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/options/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:models="http://cisco.com/cucmws/pub/jaxb/models/get" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/options/get">
+	
+	<xs:import namespace="http://cisco.com/cucmws/pub/jaxb/models/get" schemaLocation="models.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetOptions_"/>
+					<jaxb:elementName prefix="JAXBGetOptions_"/>
+					<jaxb:modelGroupName prefix="JAXBGetOptions_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetOptions_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="option">
+		<xs:sequence>
+			<xs:element type="xs:string" name="value"/>
+			<xs:element type="xs:string" name="name"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="optionWrapper">
+		<xs:sequence>
+			<xs:element name="option" type="option" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI"/>
+		<!-- <xs:attribute name="version" type="xs:string" use="optional"/> -->
+	</xs:complexType>
+
+	<xs:complexType name="userPolicy">
+		<xs:attribute name="uri" type="xs:anyURI"/>
+	</xs:complexType>
+	
+	<xs:element name="options">
+		<xs:complexType>
+			<xs:sequence>
+					<xs:element name="messageWaitingVisualAlertPreference" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="messageWaitingAudibleAlertPreference" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="onACallRingPreference" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="notOnACallRingPreference" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="doNotDisturbSettings" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="voiceMailAvoidancePolicy" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="dayOfWeek" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="timeOfDay" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="remoteDestinationUsage" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="installedLocales" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="timeZones" type="optionWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="models" type="models:modelWrapper" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="userPolicy" type="userPolicy" maxOccurs="1" minOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

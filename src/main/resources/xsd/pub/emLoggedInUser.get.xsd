@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/emloggedinuser/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get"
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/emloggedinuser/get">
+	
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetEmLoggedInUser_"/>
+					<jaxb:elementName prefix="JAXBGetEmLoggedInUser_"/>
+					<jaxb:modelGroupName prefix="JAXBGetEmLoggedInUser_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetEmLoggedInUser_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:element name="emLoggedInUser">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="deviceType" type="xs:string"/>
+				<xs:element name="currentUserId" type="xs:string"/>
+				<xs:element name="lastLoggedInUserId" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

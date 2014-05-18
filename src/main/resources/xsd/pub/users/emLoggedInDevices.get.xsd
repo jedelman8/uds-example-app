@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/emloggedindevices/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get"
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/emloggedindevices/get">
+	
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetEmLoggedInDevices_"/>
+					<jaxb:elementName prefix="JAXBGetEmLoggedInDevices_"/>
+					<jaxb:modelGroupName prefix="JAXBGetEmLoggedInDevices_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetEmLoggedInDevices_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+		
+	<xs:complexType name="emLoggedInDevice">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="type" type="xs:string"/>
+			<xs:element name="model" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="protocol" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:element name="emLoggedInDevices">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="emLoggedInDevice" type="emLoggedInDevice" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/devices/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/devices/get">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetDevices_"/>
+					<jaxb:elementName prefix="JAXBGetDevices_"/>
+					<jaxb:modelGroupName prefix="JAXBGetDevices_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetDevices_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:simpleType name="sourceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="admin" />
+			<xs:enumeration value="user" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="description">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="editable" type="xs:boolean" />
+				<xs:attribute name="source" type="sourceType" use="required" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="device">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="type" type="xs:string"/>
+			<xs:element name="model" type="xs:string"/>
+			<xs:element name="description" type="description"/>
+			<xs:element name="protocol" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="devices">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="device" type="device" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

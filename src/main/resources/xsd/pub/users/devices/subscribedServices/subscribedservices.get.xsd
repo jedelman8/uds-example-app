@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/subscribedservices/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/subscribedservices/get"
+	elementFormDefault="unqualified" 
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:import namespace="http://cisco.com/cucmws/common/jaxb/get" schemaLocation="../../../../common.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXB"/>
+					<jaxb:elementName prefix="JAXBGetDeviceSubscribedServices_"/>
+					<jaxb:modelGroupName prefix="JAXB"/>
+					<jaxb:anonymousTypeName prefix="JAXB"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="GetDeviceSubscribedServices_PhoneServiceName">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="phoneServiceId" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="GetDeviceSubscribedServices_SubscribedService">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="url" type="xs:anyURI"/>
+			<xs:element name="secureUrl" type="xs:anyURI"/>
+			<xs:element name="phoneServiceName" type="GetDeviceSubscribedServices_PhoneServiceName"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="GetDeviceSubscribedServices_SubscribedServices">
+		<xs:sequence>
+			<xs:element name="subscribedService" type="GetDeviceSubscribedServices_SubscribedService" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI"/>
+		<xs:attribute name="version" type="xs:string"/>
+	</xs:complexType>
+	
+	<xs:element name="subscribedServices" type="GetDeviceSubscribedServices_SubscribedServices"/>
+</xs:schema>

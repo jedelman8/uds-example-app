@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/models/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/models/get">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetModels_"/>
+					<jaxb:elementName prefix="JAXBGetModels_"/>
+					<jaxb:modelGroupName prefix="JAXBGetModels_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetModels_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	
+	<xs:complexType name="userGuide">
+		<xs:attribute name="uri" type="xs:anyURI" />
+		<xs:attribute name="protocol" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="userGuides">
+		<xs:sequence>
+			<xs:element type="userGuide" name="userGuide" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="model">
+		<xs:sequence>
+			<xs:element type="xs:string" name="value"/>
+			<xs:element type="xs:string" name="name"/>
+			<xs:element type="xs:string" name="productId"/>
+			<xs:element type="userGuides" name="userGuides"  maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="modelWrapper">
+		<xs:sequence>
+			<xs:element name="option" type="model" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI"/>
+	</xs:complexType>
+	
+	<xs:element name="models">
+  		<xs:complexType>
+  			<xs:complexContent>
+  				<xs:extension base="modelWrapper"/>
+  			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

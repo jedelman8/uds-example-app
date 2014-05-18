@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/userspeeddials/put"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/userspeeddials/put">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBPutUserSpeedDials_"/>
+					<jaxb:elementName prefix="JAXBPutUserSpeedDials_"/>
+					<jaxb:modelGroupName prefix="JAXBPutUserSpeedDials_"/>
+					<jaxb:anonymousTypeName prefix="JAXBPutUserSpeedDials_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="speedDial">
+		<xs:sequence>
+			<xs:element name="index" type="xs:int">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="index">
+							<jaxb:baseType>
+								<jaxb:javaType name="Integer"/>
+							</jaxb:baseType>
+						</jaxb:property>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="number" type="xs:string"/>
+			<xs:element name="label" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="speedDials">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="speedDial" type="speedDial" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

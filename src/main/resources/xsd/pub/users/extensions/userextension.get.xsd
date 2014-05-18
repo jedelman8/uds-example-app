@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/userextension/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/userextension/get">
+	
+	<xs:import namespace="http://cisco.com/cucmws/common/jaxb/get" schemaLocation="../../../common.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetUserExtension_"/>
+					<jaxb:elementName prefix="JAXBGetUserExtension_"/>
+					<jaxb:modelGroupName prefix="JAXBGetUserExtension_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetUserExtension_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="callForwardAllDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardBusyExternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardNoAnswerExternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardBusyInternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardNoAnswerInternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="label">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="appliesToAllLineAppearances" type="xs:boolean"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="logMissedCalls">
+		<xs:annotation>
+			<xs:appinfo> 
+				<jaxb:property name="value">
+					<jaxb:baseType>
+						<jaxb:javaType name="Boolean"/>
+					</jaxb:baseType>
+				</jaxb:property>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:boolean">
+				<xs:attribute name="appliesToAllLineAppearances" type="xs:boolean"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="preference">
+		<xs:sequence>
+			<xs:element name="option" type="common:option" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="appliesToAllLineAppearances" type="xs:boolean"/>
+		<xs:attribute name="value" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:property name="valueAttribute"/>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	
+	
+	<xs:element name="extension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:string"/>
+				<xs:element name="directoryNumber" type="xs:string"/>
+				<xs:element name="routePartition" type="xs:string" minOccurs="0"/>
+				<xs:element name="voiceMailPilotNumber" type="xs:string"/>
+				<xs:element name="callForwardAllDestination" type="callForwardAllDestination"/> 
+				<xs:element name="forwardBusyExternalCallDestination" type="forwardBusyExternalCallDestination"/>
+				<xs:element name="forwardNoAnswerExternalCallDestination" type="forwardNoAnswerExternalCallDestination"/>
+				<xs:element name="forwardBusyInternalCallDestination" type="forwardBusyInternalCallDestination"/>
+				<xs:element name="forwardNoAnswerInternalCallDestination" type="forwardNoAnswerInternalCallDestination"/>
+				<xs:element name="messageWaitingVisualAlert" type="xs:boolean"/>
+				<xs:element name="messageWaitingVisualAlertPreference" type="preference"/>
+				<xs:element name="messageWaitingAudibleAlertPreference" type="preference"/>
+				<xs:element name="onACallRingPreference" type="preference"/>
+				<xs:element name="notOnACallRingPreference" type="preference"/>
+				<xs:element name="label" type="label"/>
+				<xs:element name="logMissedCalls" type="logMissedCalls"/>
+			</xs:sequence>
+			<xs:attribute name="isPrimary" type="xs:boolean" use="required"/>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

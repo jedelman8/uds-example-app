@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://cisco.com/cucmws/pub/jaxb/remotedestination/putPost"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/remotedestination/putPost"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBPutPostRemoteDestination_"/>
+					<jaxb:elementName prefix="JAXBPutPostRemoteDestination_"/>
+					<jaxb:modelGroupName prefix="JAXBPutPostRemoteDestination_"/>
+					<jaxb:anonymousTypeName prefix="JAXBPutPostRemoteDestination_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:simpleType name="oneDecimalDigit">
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	 <xs:complexType name="associatedExtension">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="enable" type="xs:boolean" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="associatedExtensions">
+        <xs:sequence>
+            <xs:element name="associatedExtension" type="associatedExtension" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="associatedDevice">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="usage" type="xs:int" minOccurs="1"/>
+			<xs:element name="associatedExtensions" type="associatedExtensions"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="associatedDevices">
+		<xs:sequence>
+			<xs:element name="associatedDevice" type="associatedDevice" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="voiceMailAvoidanceSettings">
+		<xs:sequence>
+			<xs:element name="answerTooSoonTimer" type="oneDecimalDigit"/>
+			<xs:element name="voiceMailAvoidancePolicy" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="advancedSettings">
+		<xs:sequence>
+			<xs:element name="delayBeforeRingTimer" type="oneDecimalDigit"/>
+			<xs:element name="voiceMailAvoidanceSettings" type="voiceMailAvoidanceSettings"/>
+			<xs:element name="answerTooLateTimer" type="oneDecimalDigit"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="day">
+		<xs:sequence>
+			<xs:element name="dayOfWeek" type="xs:int" minOccurs="1"/>
+			<xs:element name="timeOfDayStart" type="xs:int" minOccurs="1"/>
+			<xs:element name="timeOfDayEnd" type="xs:int" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="days">
+		<xs:sequence>
+			<xs:element name="day" type="day" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="schedule">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="timeZone" type="xs:int" minOccurs="0"/>
+			<xs:element name="days" type="days"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="remoteDestination">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string"/>
+				<xs:element name="destination" type="xs:string"/>
+				<xs:element name="ringWhenExtensionDialed" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="allowTransferToMobile" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="allowControlFromApplication" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="advancedSettings" type="advancedSettings"/>
+				<xs:element name="associatedDevices" type="associatedDevices"/>
+				<xs:element name="schedule" type="schedule"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

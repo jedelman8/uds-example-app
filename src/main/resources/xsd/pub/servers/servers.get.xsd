@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/servers/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/servers/get"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetServers_"/>
+					<jaxb:elementName prefix="JAXBGetServers_"/>
+					<jaxb:modelGroupName prefix="JAXBGetServers_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetServers_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+
+	<xs:element name="servers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element type="xs:string" name="server" maxOccurs="unbounded" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

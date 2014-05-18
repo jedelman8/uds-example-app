@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/deviceextension/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/deviceextension/get"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:import namespace="http://cisco.com/cucmws/common/jaxb/get" schemaLocation="../../../../common.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetDeviceExtension_"/>
+					<jaxb:elementName prefix="JAXBGetDeviceExtension_"/>
+					<jaxb:modelGroupName prefix="JAXBGetDeviceExtension_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetDeviceExtension_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="callForwardAllDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardBusyExternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardNoAnswerExternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardBusyInternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardNoAnswerInternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean"/>
+			<xs:element name="sendToCustomDestination" type="xs:string"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="preference">
+		<xs:sequence>
+			<xs:element name="option" type="common:option" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:property name="valueAttribute"/>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:element name="extension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:string"/>
+				<xs:element name="directoryNumber" type="xs:string"/>
+				<xs:element name="routePartition" type="xs:string"/>
+				<xs:element name="voiceMailPilotNumber" type="xs:string"/>
+				<xs:element name="callForwardAllDestination" type="callForwardAllDestination"/>
+				<xs:element name="forwardBusyExternalCallDestination" type="forwardBusyExternalCallDestination"/>
+				<xs:element name="forwardNoAnswerExternalCallDestination" type="forwardNoAnswerExternalCallDestination"/>
+				<xs:element name="forwardBusyInternalCallDestination" type="forwardBusyInternalCallDestination"/>
+				<xs:element name="forwardNoAnswerInternalCallDestination" type="forwardNoAnswerInternalCallDestination"/>
+				<xs:element name="messageWaitingVisualAlert" type="xs:boolean"/>
+				<xs:element name="messageWaitingVisualAlertPreference" type="preference"/>
+				<xs:element name="messageWaitingAudibleAlertPreference" type="preference"/>
+				<xs:element name="onACallRingPreference" type="preference"/>
+				<xs:element name="notOnACallRingPreference" type="preference"/>
+				<xs:element name="logMissedCalls" type="xs:boolean"/>
+				<xs:element name="label" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="isPrimary" type="xs:anyURI" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

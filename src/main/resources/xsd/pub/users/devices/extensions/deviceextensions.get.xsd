@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/deviceextensions/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/deviceextensions/get"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetDeviceExtensions_" />
+					<jaxb:elementName prefix="JAXBGetDeviceExtensions_" />
+					<jaxb:modelGroupName prefix="JAXBGetDeviceExtensions_" />
+					<jaxb:anonymousTypeName prefix="JAXBGetDeviceExtensions_" />
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+
+	<xs:complexType name="callForwardAllDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" />
+			<xs:element name="sendToCustomDestination" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="preference">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="value" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="valueAttribute"/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="extension">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" />
+			<xs:element name="directoryNumber" type="xs:string" />
+			<xs:element name="routePartition" type="xs:string" />
+			<xs:element name="voiceMailPilotNumber" type="xs:string" />
+			<xs:element name="callForwardAllDestination" type="callForwardAllDestination" />
+			<xs:element name="messageWaitingVisualAlert" type="xs:boolean"/>
+			<xs:element name="messageWaitingVisualAlertPreference" type="preference"/>
+			<xs:element name="messageWaitingAudibleAlertPreference" type="preference"/>
+			<xs:element name="onACallRingPreference" type="preference"/>
+			<xs:element name="notOnACallRingPreference" type="preference"/>
+			<xs:element name="logMissedCalls" type="xs:boolean" />
+			<xs:element name="label" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required" />
+		<xs:attribute name="isPrimary" type="xs:anyURI" use="required" />
+	</xs:complexType>
+
+	<xs:element name="extensions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="extension" type="extension" minOccurs="0"
+					maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required" />
+			<xs:attribute name="uri" type="xs:anyURI" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/device/put"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/device/put">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBPutDevice_"/>
+					<jaxb:elementName prefix="JAXBPutDevice_"/>
+					<jaxb:modelGroupName prefix="JAXBPutDevice_"/>
+					<jaxb:anonymousTypeName prefix="JAXBPutDevice_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="doNotDisturbSettings">
+		<xs:sequence>
+			<xs:element name="enable" type="xs:string"/>
+			<xs:element name="callType" type="xs:string"/>
+			<xs:element name="alertMe" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="device">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="description" type="xs:string"/>
+				<xs:element name="phoneLocale" type="xs:string"/>
+				<xs:element name="doNotDisturbSettings" type="doNotDisturbSettings"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

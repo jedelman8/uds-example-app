@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/userpolicy/get" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:policy="http://cisco.com/cucmws/pub/jaxb/policy/get"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/userpolicy/get" 
+	elementFormDefault="unqualified" 
+	attributeFormDefault="unqualified" 
+	jaxb:version="2.1">
+	
+	<xs:import namespace="http://cisco.com/cucmws/pub/jaxb/policy/get" schemaLocation="policy.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetUserPolicy_"/>
+					<jaxb:elementName prefix="JAXBGetUserPolicy_"/>
+					<jaxb:modelGroupName prefix="JAXBGetUserPolicy_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetUserPolicy_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:element name="userPolicy">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="policy" type="policy:policy" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

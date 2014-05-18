@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/common/jaxb/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/common/jaxb/get">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetCommon_"/>
+					<jaxb:elementName prefix="JAXBGetCommon_"/>
+					<jaxb:modelGroupName prefix="JAXBGetCommon_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetCommon_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="drillDown">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+				<xs:attribute name="value" type="xs:string" use="optional">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="valueAttribute"/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="option">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="value" type="xs:int" use="required">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="valueAttribute"/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="error">
+		<xs:sequence>
+			<xs:element name="code" type="xs:string" minOccurs="1"/>
+			<xs:element name="message" type="xs:string" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="error" type="error"/>
+
+	<!--
+	TODO: currently unused, may wish to use the JAXB2 Inheritance plugin to get this working
+		http://confluence.highsource.org/display/J2B/Inheritance+plugin
+	
+	<xs:attributeGroup name="resource">
+		<xs:attribute name="version" type="xs:string" use="required"/>
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:attributeGroup>
+	-->
+</xs:schema>

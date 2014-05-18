@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1"
+	jaxb:extensionBindingPrefixes="xjc">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:globalBindings underscoreBinding="asCharInWord">
+				<xjc:simple/>
+			</jaxb:globalBindings>
+		</xs:appinfo>
+	</xs:annotation>
+</xs:schema>

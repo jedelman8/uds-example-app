@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://cisco.com/cucmws/pub/jaxb/remotedestinations/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get" 
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/remotedestinations/get"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:import namespace="http://cisco.com/cucmws/common/jaxb/get" schemaLocation="../../../common.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetRemoteDestinations_"/>
+					<jaxb:elementName prefix="JAXBGetRemoteDestinations_"/>
+					<jaxb:modelGroupName prefix="JAXBGetRemoteDestinations_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetRemoteDestinations_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="associatedDevice">
+		<xs:sequence>
+			<xs:element name="usage" type="common:drillDown"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="associatedDevices">
+		<xs:sequence>
+			<xs:element name="associatedDevice" type="associatedDevice" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="schedule">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="remoteDestination">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="destination" type="xs:string"/>
+			<xs:element name="ringWhenExtensionDialed" type="xs:boolean"/>
+			<xs:element name="allowTransferToMobile" type="xs:boolean"/>
+			<xs:element name="allowControlFromApplication" type="xs:boolean"/>
+			<xs:element name="associatedDevices" type="associatedDevices"/>
+			<xs:element name="schedule" type="schedule"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="remoteDestinations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="remoteDestination" type="remoteDestination" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

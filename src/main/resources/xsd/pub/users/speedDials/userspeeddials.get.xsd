@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/userspeeddials/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/userspeeddials/get">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetUserSpeedDials_"/>
+					<jaxb:elementName prefix="JAXBGetUserSpeedDials_"/>
+					<jaxb:modelGroupName prefix="JAXBGetUserSpeedDials_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetUserSpeedDials_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="speedDial">
+		<xs:sequence>
+			<xs:element name="index" type="xs:int"/>
+			<xs:element name="number" type="xs:string"/>
+			<xs:element name="label" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="speedDials">
+		<xs:sequence>
+			<xs:element name="speedDial" type="speedDial" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="appliesToAllDevices" type="xs:boolean" use="required"/>
+		<xs:attribute name="totalCount" type="xs:int" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="device">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="description" type="xs:string" use="required"/>
+		<xs:attribute name="speedDialsUri" type="xs:string" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="devices">
+		<xs:sequence>
+			<xs:element name="device" type="device" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="userSpeedDials">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="speedDials" type="speedDials" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="devices" type="devices"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

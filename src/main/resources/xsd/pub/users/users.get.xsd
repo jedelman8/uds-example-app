@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/users/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/users/get">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetUsers_"/>
+					<jaxb:elementName prefix="JAXBGetUsers_"/>
+					<jaxb:modelGroupName prefix="JAXBGetUsers_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetUsers_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="directoryUri">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:boolean" name="exist" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="user">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="userName" type="xs:string"/>
+			<xs:element name="firstName" type="xs:string"/>
+			<xs:element name="lastName" type="xs:string"/>
+			<xs:element name="middleName" type="xs:string"/>
+			<xs:element name="nickName" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="homeNumber" type="xs:string"/>
+			<xs:element name="mobileNumber" type="xs:string"/>
+			<xs:element name="email" type="xs:string"/>
+			<xs:element name="directoryUri" type="directoryUri"/>
+			<xs:element name="msUri" type="xs:string"/>
+			<xs:element name="department" type="xs:string"/>
+			<xs:element name="manager" type="xs:string"/>
+			<xs:element name="title" type="xs:string"/>
+			<xs:element name="pager" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	
+	<xs:element name="users">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="user" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="start" type="xs:int" use="required"/>
+			<xs:attribute name="requestedCount" type="xs:int" use="required"/>
+			<xs:attribute name="returnedCount" type="xs:int" use="required"/>
+			<xs:attribute name="totalCount" type="xs:int" use="required"/>
+			<xs:attribute name="bulkSearch" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

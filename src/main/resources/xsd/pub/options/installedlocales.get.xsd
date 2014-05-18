@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/installedlocales/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:options="http://cisco.com/cucmws/pub/jaxb/options/get" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/installedlocales/get">
+	
+	<xs:import namespace="http://cisco.com/cucmws/pub/jaxb/options/get" schemaLocation="options.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetInstalledLocales_"/>
+					<jaxb:elementName prefix="JAXBGetInstalledLocales_"/>
+					<jaxb:modelGroupName prefix="JAXBGetInstalledLocales_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetInstalledLocales_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:element name="installedLocales">
+  		<xs:complexType>
+    		<xs:complexContent>
+				<xs:extension base="options:optionWrapper"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

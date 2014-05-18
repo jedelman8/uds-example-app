@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/clusteruser/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/clusteruser/get"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetClusterUser_"/>
+					<jaxb:elementName prefix="JAXBGetClusterUser_"/>
+					<jaxb:modelGroupName prefix="JAXBGetClusterUser_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetClusterUser_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="result">
+		<xs:attribute type="xs:boolean" name="found"/>
+		<xs:attribute type="xs:anyURI" name="uri"/>
+		<xs:attribute type="xs:string" name="version"/>
+	</xs:complexType>
+	
+	<xs:complexType name="homeCluster">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="serversUri" type="xs:anyURI"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="homeClusterDetails">
+			<xs:sequence>
+				<xs:element type="xs:boolean" name="selfProvisioningSecureMode"/>
+				<xs:element type="xs:boolean" name="adminProvisionMode"/>
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="clusterUser">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element type="result" name="result"/>
+				<xs:element type="xs:boolean" name="timeout" minOccurs="0"/>
+				<xs:element type="homeCluster" name="homeCluster" minOccurs="0"/>
+				<xs:element type="homeClusterDetails" name="homeClusterDetails" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute type="xs:string" name="version"/>
+			<xs:attribute type="xs:anyURI" name="uri"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

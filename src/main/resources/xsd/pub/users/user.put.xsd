@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://cisco.com/cucmws/pub/jaxb/user/put"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/user/put">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBPutUser_"/>
+					<jaxb:elementName prefix="JAXBPutUser_"/>
+					<jaxb:modelGroupName prefix="JAXBPutUser_"/>
+					<jaxb:anonymousTypeName prefix="JAXBPutUser_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="callForwardAllDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="destination" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="primaryExtension">
+		<xs:sequence>
+			<xs:element name="callForwardAllDestination" type="callForwardAllDestination" minOccurs="0"/> 
+			<xs:element name="logMissedCalls" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="messageWaitingVisualAlertPreference" type="xs:string"/>
+			<xs:element name="messageWaitingAudibleAlertPreference" type="xs:string"/>
+			<xs:element name="onACallRingPreference" type="xs:string"/>
+			<xs:element name="notOnACallRingPreference" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="userLocale">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="appliesToAllDevices" type="xs:boolean"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:element name="user">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="primaryExtension" type="primaryExtension" minOccurs="0"/>
+				<xs:element name="userLocale" type="userLocale" minOccurs="0"/>
+				<xs:element name="enableCalendarPresence" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="enableDoNotDisturb" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="callForwardAllDestination" type="callForwardAllDestination" minOccurs="0"/>
+				<xs:element name="logMissedCalls" type="xs:boolean" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://cisco.com/cucmws/pub/jaxb/subscribedservices"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/subscribedservices"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXB"/>
+					<jaxb:elementName prefix="JAXB"/>
+					<jaxb:modelGroupName prefix="JAXB"/>
+					<jaxb:anonymousTypeName prefix="JAXB"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="DeviceSubscribedService_Parameter">
+		<xs:sequence>
+			<xs:element name="paramId" type="xs:string"/>
+			<xs:element name="value" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="DeviceSubscribedService_Parameters">
+		<xs:sequence>
+			<xs:element name="parameter" type="DeviceSubscribedService_Parameter" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://cisco.com/cucmws/pub/jaxb/subscribedservices/putpost"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:parameter="http://cisco.com/cucmws/pub/jaxb/subscribedservices"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/subscribedservices/putpost"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:import namespace="http://cisco.com/cucmws/pub/jaxb/subscribedservices" schemaLocation="devices/subscribedServices/parameter.xsd"/>	
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXB"/>
+					<jaxb:elementName prefix="JAXBPutPostSubscribedServices_"/>
+					<jaxb:modelGroupName prefix="JAXB"/>
+					<jaxb:anonymousTypeName prefix="JAXB"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="PutPostSubscribedServices_SubscribedService">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="phoneServiceId" type="xs:string"/>
+			<xs:element name="url" type="xs:anyURI"/>
+			<xs:element name="secureUrl" type="xs:anyURI"/>
+			<xs:element name="parameters" type="parameter:DeviceSubscribedService_Parameters" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PutPostSubscribedServices_SubscribedServices">
+		<xs:sequence>
+			<xs:element name="subscribedService" type="PutPostSubscribedServices_SubscribedService" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="subscribedServices" type="PutPostSubscribedServices_SubscribedServices"/>
+</xs:schema>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/deviceextension/put"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/deviceextension/put"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBPutDeviceExtension_"/>
+					<jaxb:elementName prefix="JAXBPutDeviceExtension_"/>
+					<jaxb:modelGroupName prefix="JAXBPutDeviceExtension_"/>
+					<jaxb:anonymousTypeName prefix="JAXBPutDeviceExtension_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="callForwardAllDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="sendToCustomDestination" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardBusyExternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="sendToCustomDestination" type="xs:string" minOccurs="0"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardNoAnswerExternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="sendToCustomDestination" type="xs:string" minOccurs="0"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardBusyInternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="sendToCustomDestination" type="xs:string" minOccurs="0"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="forwardNoAnswerInternalCallDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="sendToCustomDestination" type="xs:string" minOccurs="0"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="extension">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="callForwardAllDestination" type="callForwardAllDestination" minOccurs="0"/>
+				<xs:element name="forwardBusyExternalCallDestination" type="forwardBusyExternalCallDestination" minOccurs="0"/>
+				<xs:element name="forwardNoAnswerExternalCallDestination" type="forwardNoAnswerExternalCallDestination" minOccurs="0"/>
+				<xs:element name="forwardBusyInternalCallDestination" type="forwardBusyInternalCallDestination" minOccurs="0"/>
+				<xs:element name="forwardNoAnswerInternalCallDestination" type="forwardNoAnswerInternalCallDestination" minOccurs="0"/>
+				<xs:element name="logMissedCalls" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="label" type="xs:string" minOccurs="0"/>
+				<xs:element name="messageWaitingVisualAlertPreference" type="xs:string" minOccurs="0"/>
+				<xs:element name="messageWaitingAudibleAlertPreference" type="xs:string" minOccurs="0"/>
+				<xs:element name="onACallRingPreference" type="xs:string" minOccurs="0"/>
+				<xs:element name="notOnACallRingPreference" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

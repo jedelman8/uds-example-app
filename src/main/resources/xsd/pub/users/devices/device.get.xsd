@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/device/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/device/get">
+	
+	<xs:import namespace="http://cisco.com/cucmws/common/jaxb/get" schemaLocation="../../../common.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetDevice_"/>
+					<jaxb:elementName prefix="JAXBGetDevice_"/>
+					<jaxb:modelGroupName prefix="JAXBGetDevice_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetDevice_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="provision">
+		<xs:sequence>
+			<xs:element name="uri" type="xs:anyURI" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="phoneLocale">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+				<xs:attribute name="value" type="xs:int">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="valueAttribute"/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="supportedOptions">
+		<xs:sequence>
+			<xs:element name="option" type="common:option" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="callTypeOption">
+		<xs:sequence>
+			<xs:element name="supportedDndOptions" type="supportedOptions"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:property name="valueAttribute"/>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="incomingCallAlertSetting">
+		<xs:sequence>
+			<xs:element name="supportedRingSettings" type="supportedOptions"/>
+		</xs:sequence>
+		<xs:attribute name="value" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:property name="valueAttribute"/>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="doNotDisturbSettings">
+		<xs:sequence>
+			<!-- the actual values for mwl, mwi, and linetext are associated per line, not device -->
+			<xs:element name="enable" type="xs:string"/>
+			<xs:element name="option" type="callTypeOption"/>
+			<xs:element name="incomingCallAlertSetting" type="incomingCallAlertSetting"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="sourceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="admin" />
+			<xs:enumeration value="user" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="description">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="editable" type="xs:boolean" />
+				<xs:attribute name="source" type="sourceType" use="required" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:element name="device">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:string"/>
+				<xs:element name="name" type="xs:string"/>
+				<xs:element name="type" type="xs:string"/>
+				<xs:element name="description" type="description"/>
+				<xs:element name="model" type="xs:string"/>
+				<xs:element name="protocol" type="xs:string"/>
+				<xs:element name="requireCerLocation" type="xs:boolean"/>
+				<xs:element name="provision" type="provision"/>
+				<xs:element name="doNotDisturbSettings" type="doNotDisturbSettings"/>
+				<xs:element name="userGuide" type="common:drillDown"/>
+				<xs:element name="phoneLocale" type="phoneLocale"/>
+				<xs:element name="extensions" type="common:drillDown"/>
+				<xs:element name="subscribedServices" type="common:drillDown"/>
+				<xs:element name="speedDials" type="common:drillDown"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="hasPrimaryNumber" type="xs:boolean" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

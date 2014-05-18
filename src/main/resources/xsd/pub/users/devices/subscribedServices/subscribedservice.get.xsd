@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns="http://cisco.com/cucmws/pub/jaxb/subscribedservice/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:plural="http://cisco.com/cucmws/pub/jaxb/subscribedservices/get"
+	xmlns:parameter="http://cisco.com/cucmws/pub/jaxb/subscribedservices"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/subscribedservice/get"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	jaxb:version="2.1">
+	
+	<xs:import schemaLocation="parameter.xsd" namespace="http://cisco.com/cucmws/pub/jaxb/subscribedservices"/>
+	<xs:import schemaLocation="subscribedservices.get.xsd" namespace="http://cisco.com/cucmws/pub/jaxb/subscribedservices/get"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXB"/>
+					<jaxb:elementName prefix="JAXBGetDeviceSubscribedService_"/>
+					<jaxb:modelGroupName prefix="JAXB"/>
+					<jaxb:anonymousTypeName prefix="JAXB"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="GetDeviceSubscribedService_Parameter">
+		<xs:complexContent>
+			<xs:extension base="parameter:DeviceSubscribedService_Parameter">
+				<xs:sequence>
+					<xs:element name="displayName" type="xs:string"/>
+					<xs:element name="description" type="xs:string"/>
+					<xs:element name="defaultValue" type="xs:string"/>
+					<xs:element name="isRequired" type="xs:boolean"/>
+					<xs:element name="isCredential" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="GetDeviceSubscribedService_Parameters">
+		<xs:sequence>
+			<xs:element name="parameter" type="GetDeviceSubscribedService_Parameter" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="GetDeviceSubscribedService_SubscribedService">
+		<xs:complexContent>
+			<xs:extension base="plural:GetDeviceSubscribedServices_SubscribedService">
+				<xs:sequence>
+					<xs:element name="parameters" type="GetDeviceSubscribedService_Parameters"/>
+				</xs:sequence>
+				<xs:attribute name="version" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="subscribedService" type="GetDeviceSubscribedService_SubscribedService"/>
+</xs:schema>

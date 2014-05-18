@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/devicespeeddial/post"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/devicespeeddial/post">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBPostDeviceSpeedDial_"/>
+					<jaxb:elementName prefix="JAXBPostDeviceSpeedDial_"/>
+					<jaxb:modelGroupName prefix="JAXBPostDeviceSpeedDial_"/>
+					<jaxb:anonymousTypeName prefix="JAXBPostDeviceSpeedDial_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:element name="speedDial">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="index" type="xs:int">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="index">
+								<jaxb:baseType>
+									<jaxb:javaType name="Integer"/>
+								</jaxb:baseType>
+							</jaxb:property>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="number" type="xs:string"/>
+				<xs:element name="label" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

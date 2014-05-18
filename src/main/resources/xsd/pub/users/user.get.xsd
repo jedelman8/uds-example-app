@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/user/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:common="http://cisco.com/cucmws/common/jaxb/get"
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/user/get">
+	
+	<xs:import namespace="http://cisco.com/cucmws/common/jaxb/get" schemaLocation="../../common.get.xsd"/>
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetUser_"/>
+					<jaxb:elementName prefix="JAXBGetUser_"/>
+					<jaxb:modelGroupName prefix="JAXBGetUser_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetUser_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="userLocale">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="uri" type="xs:anyURI"/>
+				<xs:attribute name="value" type="xs:string">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="valueAttribute"/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="appliesToAllDevices" type="xs:boolean"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="directoryUri">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:boolean" name="exist" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="accountType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:boolean" name="useLdapAuth"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="homeCluster">
+		<xs:simpleContent>
+			<xs:extension base="xs:boolean">
+				<xs:attribute type="xs:boolean" name="enableImAndPresence" use="required"/>
+				<xs:attribute type="xs:boolean" name="enableCalendarPresence" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="callForwardAllDestination">
+		<xs:sequence>
+			<xs:element name="sendToVoiceMailPilotNumber" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="destination" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="appliesToAllExtensions" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="preference">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="appliesToAllLineAppearances" type="xs:boolean"/>
+				<xs:attribute name="value" type="xs:string">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="valueAttribute"/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="primaryExtension">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="directoryNumber" type="xs:string"/>
+			<xs:element name="callForwardAllDestination" type="callForwardAllDestination"/> 
+			<xs:element name="messageWaitingVisualAlert" type="xs:boolean"/>
+			<xs:element name="messageWaitingVisualAlertPreference" type="preference"/>
+			<xs:element name="messageWaitingAudibleAlertPreference" type="preference"/>
+			<xs:element name="onACallRingPreference" type="preference"/>
+			<xs:element name="notOnACallRingPreference" type="preference"/>
+			<xs:element name="voiceMailPilotNumber" type="xs:string"/>
+			<xs:element name="label" type="xs:string"/>
+			<xs:element name="logMissedCalls" type="xs:boolean"/>
+		</xs:sequence>
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:complexType>
+	
+	<xs:complexType name="enableDoNotDisturb">
+		<xs:simpleContent>
+			<xs:extension base="xs:boolean">
+				<xs:attribute type="xs:boolean" name="appliesToAllDevices" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="serviceProfile">
+		<xs:sequence>
+			<xs:element name="uri" type="xs:anyURI" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="user">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:string"/>
+				<xs:element name="userName" type="xs:string"/>
+				<xs:element name="firstName" type="xs:string"/>
+				<xs:element name="lastName" type="xs:string"/>
+				<xs:element name="middleName" type="xs:string"/>
+				<xs:element name="nickName" type="xs:string"/>
+				<xs:element name="phoneNumber" type="xs:string"/>
+				<xs:element name="homeNumber" type="xs:string"/>
+				<xs:element name="mobileNumber" type="xs:string"/>
+				<xs:element name="mobileConnect" type="xs:boolean"/>
+				<xs:element name="remoteDestinationLimit" type="xs:int"/>
+				<xs:element name="userLocale" type="userLocale"/>
+				<xs:element name="email" type="xs:string"/>
+				<xs:element name="directoryUri" type="directoryUri"/>
+				<xs:element name="msUri" type="xs:string"/>
+				<xs:element name="department" type="xs:string"/>
+				<xs:element name="manager" type="xs:string"/>
+				<xs:element name="title" type="xs:string"/>
+				<xs:element name="pager" type="xs:string"/>
+				<xs:element name="selfServiceId" type="xs:string"/>
+				<xs:element name="accountType" type="accountType"/>
+				<xs:element name="homeCluster" type="homeCluster"/>
+				<xs:element name="primaryExtension" type="primaryExtension" minOccurs="0"/>
+				<xs:element name="callForwardAllDestination" type="callForwardAllDestination"/>
+				<xs:element name="enableDoNotDisturb" type="enableDoNotDisturb"/>
+				<xs:element name="serviceProfile" type="serviceProfile"/>
+				<xs:element name="devices" type="common:drillDown"/>
+				<xs:element name="credentials" type="common:drillDown"/>
+				<xs:element name="extensions" type="common:drillDown"/>
+				<xs:element name="subscribedServices" type="common:drillDown"/>
+				<xs:element name="speedDials" type="common:drillDown"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

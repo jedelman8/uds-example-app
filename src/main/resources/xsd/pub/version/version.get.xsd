@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/version/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/version/get">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetVersion_"/>
+					<jaxb:elementName prefix="JAXBGetVersion_"/>
+					<jaxb:modelGroupName prefix="JAXBGetVersion_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetVersion_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+			<jaxb:bindings node="//xs:complexType/xs:attribute[@name='version']">
+				<jaxb:property name="versionAttribute"/>
+			</jaxb:bindings> 
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:element name="versionInformation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="version" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

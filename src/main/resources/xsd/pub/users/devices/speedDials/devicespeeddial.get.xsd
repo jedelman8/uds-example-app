@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://cisco.com/cucmws/pub/jaxb/devicespeeddial/get"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="unqualified"
+	attributeFormDefault="unqualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	jaxb:version="2.1"
+	targetNamespace="http://cisco.com/cucmws/pub/jaxb/devicespeeddial/get">
+	
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:nameXmlTransform>
+					<jaxb:typeName prefix="JAXBGetDeviceSpeedDial_"/>
+					<jaxb:elementName prefix="JAXBGetDeviceSpeedDial_"/>
+					<jaxb:modelGroupName prefix="JAXBGetDeviceSpeedDial_"/>
+					<jaxb:anonymousTypeName prefix="JAXBGetDeviceSpeedDial_"/>
+				</jaxb:nameXmlTransform>
+			</jaxb:schemaBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:element name="speedDial">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:string"/>
+				<xs:element name="index" type="xs:int"/>
+				<xs:element name="number" type="xs:string"/>
+				<xs:element name="label" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="version" type="xs:string" use="required"/>
+			<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
