@@ -10,17 +10,23 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+
+import org.glassfish.jersey.client.ClientProperties;
 
 import com.cisco.cucmws.pub.jaxb.clusteruser.get.JAXBGetClusterUser_ClusterUser;
 import com.cisco.cucmws.pub.jaxb.clusteruser.get.JAXBGetClusterUser_HomeCluster;
 import com.cisco.cucmws.pub.jaxb.servers.get.JAXBGetServers_Servers;
 
 public class ExampleApp {
-	private static final String UDS_HOST = "se034a-58-240";
+	private static final int CONNECT_TIMEOUT_MS = 1000;
+	private static final int READ_TIMEOUT_MS = 1000;
+	
+	private static final String UDS_HOST = PropertyManager.getProperty("uds.host");
 	private static final String UDS_SERVICE_URL = "https://" + UDS_HOST + ":8443/cucm-uds";
 
 	private static final String CLUSTER_USER_URI = "/clusterUser";
@@ -28,31 +34,46 @@ public class ExampleApp {
 
 	public static void main(final String[] args) {
 		String username = args[0];
+		
+		Client client = getClient();
 
+		// Perform a "cluster user" lookup to determine this user's home cluster
+		try {
+			WebTarget clusterUserTarget = client.target(UDS_SERVICE_URL).path(CLUSTER_USER_URI).queryParam(USERNAME, username);
+			JAXBGetClusterUser_ClusterUser clusterUserJaxb = clusterUserTarget.request(MediaType.APPLICATION_XML).get(JAXBGetClusterUser_ClusterUser.class);
+			if (clusterUserJaxb.getResult().isFound()) {
+				JAXBGetClusterUser_HomeCluster homeClusterJaxb = clusterUserJaxb.getHomeCluster();
+				System.out.println("Found user " + username + " on cluster " + homeClusterJaxb.getValue());
+	
+				// Look up the full list servers in the user's home cluster
+				String serversUri = homeClusterJaxb.getServersUri();
+				WebTarget serversTarget = client.target(serversUri);
+				JAXBGetServers_Servers serversJaxb = serversTarget.request(MediaType.APPLICATION_XML).get(JAXBGetServers_Servers.class);
+	
+				System.out.println("Servers in home cluster:");
+				for (String server : serversJaxb.getServers()) {
+					System.out.println("\t* " + server);
+				}
+			} else {
+				System.out.println("Unable to find user " + username);
+			}
+		} catch (ProcessingException e) {
+			System.out.println("HTTP request failed: " + e.getMessage());
+		}
+	}
+
+	private static Client getClient() {
+		// Create a client instance with SSL certificate validation disabled
 		Client client = ClientBuilder.newBuilder()
 				.sslContext(getSSLContext())
 				.hostnameVerifier(getHostnameVerifier())
 				.build();
-
-		// Perform a "cluster user" lookup to determine this user's home cluster
-		WebTarget clusterUserTarget = client.target(UDS_SERVICE_URL).path(CLUSTER_USER_URI).queryParam(USERNAME, username);
-		JAXBGetClusterUser_ClusterUser clusterUserJaxb = clusterUserTarget.request(MediaType.APPLICATION_XML).get(JAXBGetClusterUser_ClusterUser.class);
-		if (clusterUserJaxb.getResult().isFound()) {
-			JAXBGetClusterUser_HomeCluster homeClusterJaxb = clusterUserJaxb.getHomeCluster();
-			System.out.println("Found user " + username + " on cluster " + homeClusterJaxb.getValue());
-
-			// Look up the full list servers in the user's home cluster
-			String serversUri = homeClusterJaxb.getServersUri();
-			WebTarget serversTarget = client.target(serversUri);
-			JAXBGetServers_Servers serversJaxb = serversTarget.request(MediaType.APPLICATION_XML).get(JAXBGetServers_Servers.class);
-
-			System.out.println("Servers in home cluster:");
-			for (String server : serversJaxb.getServers()) {
-				System.out.println("\t* " + server);
-			}
-		} else {
-			System.out.println("Unable to find user " + username);
-		}
+		
+		// Adjust connection and read timeout
+		client.property(ClientProperties.CONNECT_TIMEOUT, CONNECT_TIMEOUT_MS);
+	    client.property(ClientProperties.READ_TIMEOUT,    READ_TIMEOUT_MS);
+	    
+	    return client;
 	}
 
 	/**
@@ -60,7 +81,7 @@ public class ExampleApp {
 	 * @return SSLContext with validation disabled
 	 */
 	private static SSLContext getSSLContext() {
-		TrustManager[ ] certs = new TrustManager[ ] {
+		TrustManager[] certs = new TrustManager[ ] {
 				new X509TrustManager() {
 					@Override
 					public X509Certificate[] getAcceptedIssuers() {
