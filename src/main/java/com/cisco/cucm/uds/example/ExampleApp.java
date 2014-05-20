@@ -37,8 +37,8 @@ public class ExampleApp {
 		
 		Client client = getClient();
 
-		// Perform a "cluster user" lookup to determine this user's home cluster
 		try {
+			// Perform a "cluster user" lookup to determine this user's home cluster
 			WebTarget clusterUserTarget = client.target(UDS_SERVICE_URL).path(CLUSTER_USER_URI).queryParam(USERNAME, username);
 			JAXBGetClusterUser_ClusterUser clusterUserJaxb = clusterUserTarget.request(MediaType.APPLICATION_XML).get(JAXBGetClusterUser_ClusterUser.class);
 			if (clusterUserJaxb.getResult().isFound()) {

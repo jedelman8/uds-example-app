@@ -11,7 +11,7 @@ Caveats:
 - This example intentionally disables SSL certificate validation for demonstation purposes; DO NOT DISABLE SSL CERTIFICATE VALIDATION IN PRODUCTION.
 
 Building:
-- Compile with "gradle compileJava"
-- Create runnable app with "gradle installApp"
+- Compile with "./gradlew compileJava"
+- Create runnable app with "./gradlew installApp"
 - Run with "build/install/uds-example-app/bin/uds-example-app <username>"
 - The gradle os-package-plugin works great for RPM/DEB package types.
